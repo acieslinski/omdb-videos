@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Videos</string>
+    <string name="videos_network_failure">No internet connection. Please check your internet connection.</string>
+    <string name="videos_unknown_exception">Oops… The app encounter some issue. Please try again later.</string>
+</resources>
