@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acieslinski.videos.domain.videos.search.SearchVideosUseCase
 import com.acieslinski.videos.domain.videos.search.models.VideosResult
+import com.acieslinski.videos.domain.videos.selection.ClearVideoSelectionUseCase
+import com.acieslinski.videos.domain.videos.selection.SelectVideoDetailsUseCase
 import com.acieslinski.videos.featues.videos.list.viewmodels.mappers.VideoUiModelMapper
 import com.acieslinski.videos.featues.videos.list.viewmodels.models.VideosFailureType
 import com.acieslinski.videos.featues.videos.list.viewmodels.models.VideosUiState
@@ -18,6 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VideosViewModel @Inject constructor(
     private val searchVideosUseCase: SearchVideosUseCase,
+    private val selectVideoDetailsUseCase: SelectVideoDetailsUseCase,
+    private val clearVideoSelectionUseCase: ClearVideoSelectionUseCase,
     private val videoUiModelMapper: VideoUiModelMapper
 ) : ViewModel() {
     private val _videosUiState = MutableStateFlow(VideosUiState.DEFAULT)
@@ -29,7 +33,12 @@ class VideosViewModel @Inject constructor(
         job?.cancel()
         job = viewModelScope.launch {
             _videosUiState.update { it.copy(isLoading = true) }
-            searchVideosUseCase(query).also { updateUiState(it) }
+            searchVideosUseCase(query).also { videosResult ->
+                updateUiState(videosResult)
+                _videosUiState.value.selectedVideo?.let {
+                    selectVideoDetailsUseCase(it.id)
+                } ?: clearVideoSelectionUseCase()
+            }
         }
     }
 
@@ -54,9 +63,15 @@ class VideosViewModel @Inject constructor(
 
     fun onSelectionAction(position: Int) {
         _videosUiState.update { it.copy(selectedVideoPosition = position) }
+        _videosUiState.value.selectedVideo?.let { selectVideoDetailsUseCase(it.id) }
     }
 
     fun onDismissAlert() {
         _videosUiState.update { it.dismissedFailure() }
+    }
+
+    override fun onCleared() {
+        clearVideoSelectionUseCase()
+        super.onCleared()
     }
 }

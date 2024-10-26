@@ -24,3 +24,5 @@ include(":app")
 include(":domain")
 include(":data")
 include(":features:videos:list")
+include(":features:videos:details")
+

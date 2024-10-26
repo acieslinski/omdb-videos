@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":features:videos:list"))
+    implementation(project(":features:videos:details"))
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     implementation(libs.kotlin.coroutines.core)

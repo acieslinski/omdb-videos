@@ -8,6 +8,11 @@ data class VideosUiState(
     val selectedVideoPosition: Int = 0,
     val videos: List<VideoUiModel> = emptyList()
 ) {
+    val selectedVideo: VideoUiModel?
+        get() {
+            return if (isEmpty.not()) { videos[selectedVideoPosition] } else null
+        }
+
     fun dismissedFailure() = copy(
         failure = failure?.copy(isDismissed = true)
     )
