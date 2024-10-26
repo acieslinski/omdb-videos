@@ -9,7 +9,8 @@ import com.acieslinski.videos.featues.videos.list.viewmodels.models.VideoUiModel
 import com.acieslinski.videos.videos.databinding.FragmentVideosItemBinding
 
 class VideosAdapter(
-    private val videosList: List<VideoUiModel>
+    private val videosList: List<VideoUiModel>,
+    private val onVideoItemClickListener: ((video: VideoUiModel) -> Unit)? = null,
 ) : RecyclerView.Adapter<VideosAdapter.VideoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
@@ -29,6 +30,9 @@ class VideosAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(video: VideoUiModel) {
+            binding.root.setOnClickListener {
+                onVideoItemClickListener?.invoke(video)
+            }
             binding.titleTextView.text = video.title
             binding.releaseYearTextView.text = video.year
             binding.posterImageView.load(video.posterUrl) {

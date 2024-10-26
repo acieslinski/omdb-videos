@@ -19,9 +19,10 @@ import com.acieslinski.videos.featues.videos.list.ui.helpers.AlertDialogHelper
 import com.acieslinski.videos.featues.videos.list.ui.helpers.VideosScalingHelper
 import com.acieslinski.videos.featues.videos.list.ui.helpers.VideosSelectingHelper
 import com.acieslinski.videos.featues.videos.list.ui.helpers.snapToPosition
+import com.acieslinski.videos.videos.databinding.FragmentVideosBinding
 import com.acieslinski.videos.featues.videos.list.ui.mappers.UiStateMapper
 import com.acieslinski.videos.featues.videos.list.viewmodels.VideosViewModel
-import com.acieslinski.videos.videos.databinding.FragmentVideosBinding
+import com.acieslinski.videos.featues.videos.list.viewmodels.models.VideoUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -42,6 +43,7 @@ class VideosFragment : Fragment() {
     private var _binding: FragmentVideosBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<VideosViewModel>()
+    var onVideoItemClickListener: ((videoItem: VideoUiModel) -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +101,10 @@ class VideosFragment : Fragment() {
                 .map { it.videos }
                 .distinctUntilChanged()
                 .collectLatest {
-                    VideosAdapter(it).apply {
+                    VideosAdapter(
+                        videosList = it,
+                        onVideoItemClickListener = onVideoItemClickListener
+                    ).apply {
                         binding.videosRecyclerView.adapter = this
                     }
                 }

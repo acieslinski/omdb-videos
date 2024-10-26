@@ -5,10 +5,15 @@ import com.acieslinski.videos.data.videos.datasources.local.LocalDataSource
 import com.acieslinski.videos.data.videos.datasources.local.LocalDataSourceImpl
 import com.acieslinski.videos.data.videos.datasources.local.VideoDao
 import com.acieslinski.videos.data.videos.datasources.local.VideoDatabase
+import com.acieslinski.videos.data.videos.datasources.local.VideoDetailsDao
 import com.acieslinski.videos.data.videos.datasources.remote.RemoteVideoDataSource
 import com.acieslinski.videos.data.videos.datasources.remote.RemoteVideoDataSourceImpl
 import com.acieslinski.videos.data.videos.repositories.VideoRepository
+import com.acieslinski.videos.data.videos.repositories.details.VideoDetailsRepository
+import com.acieslinski.videos.data.videos.repositories.selection.VideoSelectionRepository
+import com.acieslinski.videos.domain.videos.details.VideoDetailsProvider
 import com.acieslinski.videos.domain.videos.search.VideoSearcher
+import com.acieslinski.videos.domain.videos.selection.VideoSelector
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,7 +40,14 @@ object DataModule {
         source
 
     @Provides
+    fun provideVideoSelector(repository: VideoSelectionRepository): VideoSelector = repository
+
+    @Provides
     fun provideVideoSearcher(repository: VideoRepository): VideoSearcher = repository
+
+    @Provides
+    fun provideVideoDetailsProvider(repository: VideoDetailsRepository): VideoDetailsProvider =
+        repository
 
     @Provides
     @Singleton
@@ -48,6 +60,10 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideVideoDao(videoDatabase: VideoDatabase): VideoDao = videoDatabase
-            .videoDao()
+    fun provideVideoDao(videoDatabase: VideoDatabase): VideoDao = videoDatabase.videoDao()
+
+    @Provides
+    @Singleton
+    fun provideVideoDetailsDao(videoDatabase: VideoDatabase): VideoDetailsDao =
+        videoDatabase.videoDetailsDao()
 }
