@@ -38,19 +38,26 @@ android {
 }
 
 dependencies {
+    // modules
     implementation(project(":domain"))
+    // images
     implementation(libs.coil)
+    // di
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+    // logging
     implementation(libs.timber)
+    // coroutines
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.android)
+    // ui
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.fragment.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    // test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
