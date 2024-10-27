@@ -9,7 +9,10 @@ java {
 }
 
 dependencies {
+    // coroutines
     implementation(libs.kotlin.coroutines.core)
+    // di
     compileOnly(libs.hilt.compiler)
+    // test
     testImplementation(libs.junit)
 }
