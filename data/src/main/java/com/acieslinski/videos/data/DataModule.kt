@@ -8,7 +8,7 @@ import com.acieslinski.videos.data.videos.datasources.local.VideoDatabase
 import com.acieslinski.videos.data.videos.datasources.local.VideoDetailsDao
 import com.acieslinski.videos.data.videos.datasources.remote.RemoteVideoDataSource
 import com.acieslinski.videos.data.videos.datasources.remote.RemoteVideoDataSourceImpl
-import com.acieslinski.videos.data.videos.repositories.VideoRepository
+import com.acieslinski.videos.data.videos.repositories.base.VideoRepository
 import com.acieslinski.videos.data.videos.repositories.details.VideoDetailsRepository
 import com.acieslinski.videos.data.videos.repositories.selection.VideoSelectionRepository
 import com.acieslinski.videos.domain.videos.details.VideoDetailsProvider

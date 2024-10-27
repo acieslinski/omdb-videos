@@ -1,4 +1,4 @@
-package com.acieslinski.videos.data.videos.repositories.mappers
+package com.acieslinski.videos.data.videos.repositories.base.mappers
 
 import com.acieslinski.videos.domain.videos.search.models.VideosResult
 import io.ktor.client.plugins.ServerResponseException

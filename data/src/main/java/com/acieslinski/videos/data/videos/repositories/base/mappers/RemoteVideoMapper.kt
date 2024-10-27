@@ -1,4 +1,4 @@
-package com.acieslinski.videos.data.videos.repositories.mappers
+package com.acieslinski.videos.data.videos.repositories.base.mappers
 
 import com.acieslinski.videos.data.videos.datasources.local.models.LocalVideo
 import com.acieslinski.videos.data.videos.datasources.remote.models.RemoteVideo

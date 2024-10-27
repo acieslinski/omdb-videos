@@ -1,11 +1,11 @@
-package com.acieslinski.videos.data.videos.repositories
+package com.acieslinski.videos.data.videos.repositories.base
 
 import com.acieslinski.videos.data.videos.datasources.local.LocalDataSource
 import com.acieslinski.videos.data.videos.datasources.remote.RemoteVideoDataSource
 import com.acieslinski.videos.data.videos.datasources.remote.models.RemoteVideo
-import com.acieslinski.videos.data.videos.repositories.mappers.ExceptionMapper
-import com.acieslinski.videos.data.videos.repositories.mappers.LocalVideoMapper
-import com.acieslinski.videos.data.videos.repositories.mappers.RemoteVideoMapper
+import com.acieslinski.videos.data.videos.repositories.base.mappers.ExceptionMapper
+import com.acieslinski.videos.data.videos.repositories.base.mappers.LocalVideoMapper
+import com.acieslinski.videos.data.videos.repositories.base.mappers.RemoteVideoMapper
 import com.acieslinski.videos.domain.videos.search.VideoSearcher
 import com.acieslinski.videos.domain.videos.search.models.VideosResult
 import kotlinx.coroutines.flow.Flow
