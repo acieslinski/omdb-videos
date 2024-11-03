@@ -2,7 +2,9 @@ package com.acieslinski.videos.features.videos.details.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.acieslinski.videos.domain.videos.details.GetVideoDetailsSelectionUseCase
 import com.acieslinski.videos.domain.videos.details.GetVideoDetailsUseCase
+import com.acieslinski.videos.domain.videos.details.models.VideoDetailsSelectionResult
 import com.acieslinski.videos.domain.videos.selection.ObserveVideoSelectionUseCase
 import com.acieslinski.videos.domain.videos.selection.models.VideoSelection
 import com.acieslinski.videos.features.videos.details.viewmodel.mappers.VideoDetailsResultMapper
@@ -20,22 +22,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideoDetailsViewModel @Inject constructor(
-    observeVideoSelectionUseCase: ObserveVideoSelectionUseCase,
-    private val getVideoDetailsUseCase: GetVideoDetailsUseCase,
+    getVideoDetailsSelectionUseCase: GetVideoDetailsSelectionUseCase,
     private val videoDetailsResultMapper: VideoDetailsResultMapper
 ) : ViewModel() {
-    @OptIn(ExperimentalCoroutinesApi::class)
-    val videoDetailsUiState: StateFlow<VideoDetailsUiState> = observeVideoSelectionUseCase()
-        .transformLatest {
+    val videoDetailsUiState: StateFlow<VideoDetailsUiState> = getVideoDetailsSelectionUseCase()
+        .map {
             when (it) {
-                is VideoSelection.Selected -> {
-                    getVideoDetailsUseCase(it.videoId)
-                        .onStart { emit(VideoDetailsUiState.Loading) }
-                        .map { videoDetailsResultMapper.mapToUiState(it) }
-                        .onEach { emit(it) }
-                        .collect(this)
-                }
-                else -> emit(VideoDetailsUiState.Empty)
+                is VideoDetailsSelectionResult.Selected -> videoDetailsResultMapper.mapToUiState(it.videoDetailsResult)
+                is VideoDetailsSelectionResult.Loading -> VideoDetailsUiState.Loading
+                else -> VideoDetailsUiState.Empty
             }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, VideoDetailsUiState.Empty)
