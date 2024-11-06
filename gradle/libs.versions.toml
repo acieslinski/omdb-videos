@@ -1,6 +1,6 @@
 [versions]
-agp = "8.3.2"
-kotlin = "1.9.0"
+agp = "8.7.2"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -15,8 +15,7 @@ ktorClient = "2.3.5"
 lifecycle = "2.6.1"
 fragment = "1.6.1"
 coil = "2.2.2"
-compose = "1.5.1"
-jetbrainsKotlinJvm = "1.9.0"
+compose = "1.5.14"
 timber = "5.0.1"
 room = "2.6.1"
 lifecycleRuntimeComposeAndroid = "2.8.6"
@@ -64,5 +63,5 @@ jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "k
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 daggerHiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
