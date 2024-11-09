@@ -40,6 +40,6 @@ class RemoteVideoDataSourceImpl @Inject constructor(
     companion object {
         const val MOVIE_SEARCH_TYPE = "movie"
         const val SERIES_SEARCH_TYPE = "series"
-        const val BASE_URL = "http://www.omdbapi.com/"
+        const val BASE_URL = "https://www.omdbapi.com/"
     }
 }
