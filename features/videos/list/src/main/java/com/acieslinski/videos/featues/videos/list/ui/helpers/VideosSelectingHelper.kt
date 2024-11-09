@@ -1,6 +1,5 @@
 package com.acieslinski.videos.featues.videos.list.ui.helpers
 
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.SnapHelper
@@ -13,9 +12,7 @@ class VideosSelectingHelper {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                    snapHelper.findSnapView(layoutManager)?.let {
-                        val position = layoutManager.getPosition(it)
+                    snapHelper.findSelectedPosition(recyclerView)?.let { position ->
                         onSelectedListener?.invoke(position)
                     }
                 }
