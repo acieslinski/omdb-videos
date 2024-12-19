@@ -1,5 +1,6 @@
 package com.acieslinski.videos.featues.videos.list.viewmodels
 
+import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.acieslinski.videos.domain.videos.search.SearchVideosUseCase
@@ -70,7 +71,8 @@ class VideosViewModel @Inject constructor(
         _videosUiState.update { it.dismissedFailure() }
     }
 
-    override fun onCleared() {
+    @RestrictTo(RestrictTo.Scope.TESTS)
+    public override fun onCleared() {
         clearVideoSelectionUseCase()
         super.onCleared()
     }

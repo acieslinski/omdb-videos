@@ -23,4 +23,7 @@ dependencies {
     compileOnly(libs.hilt.compiler)
     // test
     testImplementation(libs.junit)
+    testImplementation(libs.truth)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
